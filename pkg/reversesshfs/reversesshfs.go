@@ -52,7 +52,7 @@ func (rsf *ReverseSSHFS) Start() error {
 	if !filepath.IsAbs(rsf.RemotePath) {
 		return errors.Errorf("unexpected relative path: %q", rsf.RemotePath)
 	}
-	sshArgs = append(sshArgs, "-p", strconv.Itoa(rsf.Port), rsf.Host, "--", "sshfs", ":"+rsf.LocalPath, rsf.RemotePath, "-o", "slave")
+	sshArgs = append(sshArgs, "-p", strconv.Itoa(rsf.Port), rsf.Host, "--", "sshfs", ":"+rsf.LocalPath, rsf.RemotePath, "-o", "slave", "-o", "uid=501")
 	if rsf.Readonly {
 		sshArgs = append(sshArgs, "-o", "ro")
 	}
